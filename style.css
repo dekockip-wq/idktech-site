@@ -563,3 +563,10 @@ section { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 72px); }
 .case .hook { font-size: 1.12rem; line-height: 1.4; color: var(--kalk); font-weight: 500; text-wrap: balance; }
 .case .feat li { font-size: 0.93rem; color: #CFCAC0; }
 .case .feat li::before { background: var(--blue); width: 8px; height: 8px; top: 0.55em; }
+
+/* case-study screenshots: two phones */
+.case-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: -4px 0 4px; }
+.case-shots a { display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--ink-3); background: #000; box-shadow: 0 14px 30px -14px rgba(0,0,0,0.7); transition: transform .2s ease; }
+.case-shots a:hover { transform: translateY(-2px); }
+.case-shots img { display: block; width: 100%; height: auto; aspect-ratio: 440 / 650; object-fit: cover; object-position: top; }
+.case-shots + .for { margin-top: 6px; }
