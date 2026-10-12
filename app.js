@@ -172,6 +172,20 @@
     }, 400);
   }
 
+  /* ---------- reveal on scroll (no-JS and reduced-motion both show everything) ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if (!still && "IntersectionObserver" in window && revealEls.length) {
+    document.documentElement.classList.add("js");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    revealEls.forEach(function (el) { io.observe(el); });
+    // safety net: anything still hidden after 3 s is shown
+    setTimeout(function () { revealEls.forEach(function (el) { el.classList.add("in"); }); }, 3000);
+  }
+
   /* ---------- footer year ---------- */
   document.getElementById("year").textContent = String(new Date().getFullYear());
 })();
