@@ -617,3 +617,54 @@ section { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 72px); }
 @media (max-width: 560px) { .fixes { grid-template-columns: 1fr; } .volt-screens { gap: 8px; } .vphone { border-radius: 20px; padding: 10px 8px 12px; } .vt-g b { font-size: 1.1rem; } .vp-alarm b { font-size: 1.9rem; } }
 .vt-g b { white-space: nowrap; }
 @media (max-width: 560px) { .volt-points li { grid-template-columns: 1fr; gap: 4px; } .vt-g b { font-size: 1rem; } .vt-l { display: none; } }
+
+/* ---------- Farm Sentinel: gate illustration ---------- */
+.gate-show { background: var(--dusk-2); border: 1px solid var(--dusk-3); border-radius: var(--radius); padding: clamp(20px, 3vw, 34px); display: flex; flex-direction: column; gap: 22px; }
+.gate-show .eyebrow { color: var(--olive-l); }
+.gs-head h3 { margin-top: 10px; font: 700 clamp(1.4rem, 2.6vw, 2rem)/1.15 var(--font-fam); letter-spacing: -0.01em; color: var(--bone); max-width: 30ch; }
+.gs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .gs-grid { grid-template-columns: 1fr; } }
+.gs-card { margin: 0; background: var(--dusk); border: 1px solid var(--dusk-3); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.gs-stage { position: relative; aspect-ratio: 360 / 200; }
+.gs-svg { display: block; width: 100%; height: 100%; }
+.gs-card figcaption { padding: 16px 18px 18px; }
+.gs-steps { margin: 0; padding: 0; list-style: none; counter-reset: gs; display: grid; gap: 8px; }
+.gs-steps li { position: relative; padding-left: 30px; color: #D3CDBF; font-size: 0.95rem; line-height: 1.45; }
+.gs-steps li::before { counter-increment: gs; content: counter(gs); position: absolute; left: 0; top: 0.05em; width: 20px; height: 20px; border-radius: 50%; background: var(--olive); color: var(--bone); font: 700 0.72rem/20px var(--font-fam); text-align: center; }
+
+.gs-chip { position: absolute; left: 4%; top: 7%; display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 10px; background: rgba(14,26,23,.92); border: 1px solid var(--dusk-3); font-size: 0.7rem; color: var(--bone-m); min-width: 0; max-width: 46%; }
+.gs-chip b { font: 700 0.8rem/1.2 var(--font-fam); }
+.gs-chip.ok { border-color: rgba(147,166,94,.6); } .gs-chip.ok b { color: var(--olive-l); }
+.gs-chip.warn { border-color: rgba(232,163,61,.6); } .gs-chip.warn b { color: var(--amber); }
+.gs-plate-txt { align-self: flex-start; font: 700 0.66rem/1 var(--font-mono); letter-spacing: .06em; color: #0E1A17; background: #F7DCAC; padding: 3px 5px; border-radius: 3px; }
+
+.gs-notif { position: absolute; right: 3%; top: 6%; width: 44%; background: #F2EEE4; color: #0E1A17; border-radius: 12px; padding: 8px 9px 9px; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); display: flex; flex-direction: column; gap: 5px; font-size: 0.62rem; }
+.gs-n-top { display: flex; justify-content: space-between; color: #5A7A68; font: 500 0.55rem/1 var(--font-mono); letter-spacing: .08em; }
+.gs-notif b { font: 700 0.72rem/1.2 var(--font-fam); }
+.gs-n-photo { height: 34px; border-radius: 6px; background: linear-gradient(160deg,#3D5C4C,#16261F); display: flex; align-items: flex-end; justify-content: flex-end; padding: 3px; }
+.gs-n-photo span { font: 700 0.5rem/1 var(--font-mono); background: #F7DCAC; padding: 2px 3px; border-radius: 2px; }
+.gs-n-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.gs-n-btns span { text-align: center; padding: 5px 0; border-radius: 6px; font: 700 0.6rem/1 var(--font-fam); }
+.gs-n-btns .no { background: #E2DACB; } .gs-n-btns .yes { background: #67783F; color: #F2EEE4; }
+
+/* the loop: 9 s. Car arrives, camera scans, then (known) gate slides open and car drives through / (stranger) phone asks. */
+.gs-svg .gs-car { transform: translateX(-180px); animation: gs-drive-known 9s ease-in-out infinite; }
+.gs-svg.stranger .gs-car { animation-name: gs-drive-stranger; }
+.gs-svg .gs-gate { animation: gs-gate 9s ease-in-out infinite; }
+.gs-svg.stranger .gs-gate { animation: none; }
+.gs-svg .gs-beam { animation: gs-beam 9s ease-in-out infinite; }
+.gs-svg .gs-led { animation: gs-beam 9s ease-in-out infinite; }
+.gs-stage .gs-chip { opacity: 0; animation: gs-pop 9s ease-in-out infinite; }
+.gs-stage .gs-notif { opacity: 0; transform: translateY(-8px); animation: gs-notif 9s ease-in-out infinite; }
+@keyframes gs-drive-known { 0% { transform: translateX(-180px); } 22%, 52% { transform: translateX(14px); } 78%, 100% { transform: translateX(380px); } }
+@keyframes gs-drive-stranger { 0% { transform: translateX(-180px); } 22%, 100% { transform: translateX(14px); } }
+@keyframes gs-gate { 0%, 40% { transform: translateX(0); } 52%, 82% { transform: translateX(86px); } 94%, 100% { transform: translateX(0); } }
+@keyframes gs-beam { 0%, 22% { opacity: 0; } 26%, 36% { opacity: .28; } 40%, 100% { opacity: 0; } }
+@keyframes gs-pop { 0%, 30% { opacity: 0; } 36%, 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes gs-notif { 0%, 44% { opacity: 0; transform: translateY(-8px); } 52%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .gs-svg .gs-car, .gs-svg.stranger .gs-car { animation: none; transform: translateX(14px); }
+  .gs-svg .gs-gate, .gs-svg .gs-beam, .gs-svg .gs-led { animation: none; }
+  .gs-stage .gs-chip, .gs-stage .gs-notif { animation: none; opacity: 1; transform: none; }
+}
+@media (max-width: 560px) { .gs-chip { font-size: 0.6rem; padding: 6px 7px; } .gs-chip b { font-size: 0.68rem; } .gs-notif { width: 48%; } }
