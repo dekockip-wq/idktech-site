@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://idktech.co.za/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://idktech.co.za/</loc></url>
+  <url><loc>https://idktech.co.za/farm-sentinel.html</loc></url>
+  <url><loc>https://idktech.co.za/stockfox.html</loc></url>
+  <url><loc>https://idktech.co.za/solar.html</loc></url>
+  <url><loc>https://idktech.co.za/volttrack.html</loc></url>
+  <url><loc>https://idktech.co.za/ai-advisers.html</loc></url>
+  <url><loc>https://idktech.co.za/work.html</loc></url>
+  <url><loc>https://idktech.co.za/about.html</loc></url>
+  <url><loc>https://idktech.co.za/contact.html</loc></url>
+</urlset>
