@@ -56,15 +56,16 @@
     });
   });
 
-  /* ---------- "Ask for a quote" preselects the topic ---------- */
+  /* ---------- a link like contact.html?topic=sentinel preselects the topic ---------- */
   var topic = document.getElementById("cf-topic");
-  document.querySelectorAll("[data-topic]").forEach(function (a) {
-    a.addEventListener("click", function () { topic.value = a.getAttribute("data-topic"); });
-  });
+  if (topic) {
+    var want = new URLSearchParams(location.search).get("topic");
+    if (want && topic.querySelector('option[value="' + want.replace(/[^a-z]/g, "") + '"]')) topic.value = want;
+  }
 
   /* ---------- copy email ---------- */
   var copyBtn = document.getElementById("copy-email");
-  copyBtn.addEventListener("click", function () {
+  if (copyBtn) copyBtn.addEventListener("click", function () {
     var done = function () {
       copyBtn.innerHTML = msg("Copied", "Gekopieer");
       setTimeout(function () { copyBtn.innerHTML = msg("Copy", "Kopieer"); }, 1800);
@@ -81,7 +82,9 @@
 
   /* ---------- booking ---------- */
   var book = document.getElementById("book-call");
-  if (CONFIG.BOOKING_URL) {
+  if (!book) {
+    /* no booking link on this page */
+  } else if (CONFIG.BOOKING_URL) {
     book.href = CONFIG.BOOKING_URL;
   } else {
     book.href = "https://wa.me/" + CONFIG.WHATSAPP + "?text=" + encodeURIComponent("Hi Izak, I'd like to book a call about IDK Tech.");
@@ -124,7 +127,7 @@
   }
 
   var wl = document.getElementById("waitlist-form");
-  wl.addEventListener("submit", function (e) {
+  if (wl) wl.addEventListener("submit", function (e) {
     e.preventDefault();
     var email = document.getElementById("waitlist-email").value.trim();
     var note = document.getElementById("waitlist-note");
@@ -141,7 +144,7 @@
   });
 
   var cf = document.getElementById("contact-form");
-  cf.addEventListener("submit", function (e) {
+  if (cf) cf.addEventListener("submit", function (e) {
     e.preventDefault();
     var note = document.getElementById("contact-note");
     if (cf.botcheck.value) return;
